@@ -1,10 +1,10 @@
-import React, { useState } from "react";
 import Sidebar from "./components/Sidebar/Sidebar";
 import ActivityChart from "./components/ActivityChart/ActivityChart";
 import CalendarView from "./components/CalendarView/CalendarView";
 import Schedule from "./components/Schedule/Schedule";
 import "./App.css";
 import { FiBell, FiSearch, FiZoomIn } from "react-icons/fi";
+import { useState } from "react";
 
 const Dropdown = () => {
   const [isOpen, setIsOpen] = useState(false);
