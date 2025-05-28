@@ -1,23 +1,22 @@
-// src/components/ScheduleCard.jsx
-import React from "react";
-import "./ScheduleCard.css";
-type Appointment = {
+import './ScheduleCard.css';
+
+type Props = {
   type: string;
   time: string;
   icon: string;
-  [key: string]: unknown;
   doctor: string;
   bg: string;
 };
 
-const ScheduleCard: React.FC<Appointment> = ({ type, time, icon }) => {
+const ScheduleCard = ({ type, time, icon, doctor, bg }: Props) => {
   return (
-    <div className="schedule-card">
-      <div className="title-row">
-        <span className="title">{type}</span>
-        <div className="time">{time}</div>
+     <div className={`schedule-card-item ${bg}`}>
+      <div className="schedule-info">
+        <h4 className="schedule-title">{type}</h4>
+        <p className="schedule-time">{time}</p>
+        <p className="schedule-doctor">{doctor}</p>
       </div>
-      {icon && <span className="icon">{icon}</span>}
+      <div className="schedule-icon">{icon}</div>
     </div>
   );
 };

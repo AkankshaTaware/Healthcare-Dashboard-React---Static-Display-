@@ -11,8 +11,17 @@ html,
   height: 100%;
   width: 100%;
   font-family: 'Poppins', sans-serif;
-  background-color: #f6f9ff;
+  background: linear-gradient(120deg, #f6f9ff, #e0f7fa);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
   overflow: hidden;
+}
+
+/* Gradient animation */
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 /* App container layout */
@@ -28,6 +37,8 @@ html,
   background-color: #ffffff;
   border-right: 1px solid #e0e0e0;
   padding: 20px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+  transform: translateZ(0);
 }
 
 /* Main content layout */
@@ -35,8 +46,9 @@ html,
   flex: 1;
   display: flex;
   flex-direction: row;
-  /* padding: 20px; */
   overflow-y: auto;
+  perspective: 1200px;
+  padding: 20px;
 }
 
 /* Dashboard section (left side) */
@@ -50,6 +62,14 @@ html,
   flex-direction: column;
   min-width: 0;
   height: fit-content;
+  transform: rotateY(-2deg);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard:hover {
+  transform: rotateY(0deg) translateZ(20px);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.15);
 }
 
 /* Dashboard header */
@@ -57,7 +77,6 @@ html,
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* margin-bottom: 20px; */
 }
 
 .dashboard-header h2 {
@@ -65,6 +84,17 @@ html,
   font-weight: 600;
 }
 
+/* Zoom icon 3D interaction */
+.zoom-icon {
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.zoom-icon:hover {
+  transform: scale(1.2) rotate(5deg);
+}
+
+/* Dashboard body */
 .dashboard-body {
   display: flex;
   flex-direction: row;
@@ -84,8 +114,16 @@ html,
   width: 100%;
   max-width: 100px;
   object-fit: contain;
+  transform: rotateX(5deg);
+  filter: drop-shadow(0 8px 10px rgba(0, 0, 0, 0.1));
+  transition: transform 0.3s ease;
 }
 
+.anatomy-image:hover {
+  transform: rotateX(0deg) scale(1.05);
+}
+
+/* Tags with subtle 3D */
 .tag {
   position: absolute;
   border-radius: 20px;
@@ -93,18 +131,28 @@ html,
   padding: 6px 12px;
   color: white;
   border: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transform: translateZ(10px);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.tag:hover {
+  transform: translateZ(15px) scale(1.05);
 }
 
 .tag.heart {
   top: 20%;
   right: 0;
   background-color: #7b3aed;
+  z-index: 1;
 }
 
 .tag.leg {
   bottom: 22%;
   left: 7%;
   background-color: #0ea5e9;
+  z-index: 1;
 }
 
 /* Health cards section */
@@ -121,7 +169,15 @@ html,
   gap: 12px;
   padding: 12px 16px;
   border-radius: 16px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+  transform: translateZ(30px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateZ(40px) scale(1.02);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
 }
 
 .card-icon {
@@ -151,18 +207,29 @@ html,
 .progress.red {
   background: linear-gradient(to right, #f87171 70%, #e5e7eb 30%);
 }
+
 .progress.green {
   background: linear-gradient(to right, #34d399 70%, #e5e7eb 30%);
 }
+
 .progress.orange {
   background: linear-gradient(to right, #fb923c 70%, #e5e7eb 30%);
 }
 
-/* Activity area */
-/* .activity-area {
-  margin-top: 30px;
-} */
+.icons button {
+  background: none;
+  border: none;
+  color: #7b3aed;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
 
+.icons button:hover {
+  transform: translateZ(15px) scale(1.05);
+}
+
+/* Activity area */
 .activity-area h3 {
   font-size: 18px;
   font-weight: 500;
@@ -175,7 +242,6 @@ html,
   display: flex;
   flex-direction: column;
   gap: 10px;
-
 }
 
 /* Scrollbar styling (optional) */
@@ -185,7 +251,9 @@ html,
 ::-webkit-scrollbar-thumb {
   background-color: #cfd8dc;
   border-radius: 10px;
-}/* Make the top-bar stretch full width */
+}
+
+/* Top-bar */
 .top-bar {
   width: 100%;
   display: flex;
@@ -204,6 +272,13 @@ html,
   padding: 8px 12px;
   width: 100%;
   position: relative;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transform: translateZ(10px);
+  transition: box-shadow 0.3s ease;
+}
+
+.search-bar:hover {
+  box-shadow: 0 8px 24px rgba(0,0,0,0.1);
 }
 
 /* Input inside search bar */
@@ -221,56 +296,133 @@ html,
   font-size: 20px;
   cursor: pointer;
   margin-left: 8px;
+  transition: transform 0.3s ease;
 }
+
+.bell-icon:hover {
+  transform: scale(1.15);
+}
+
+/* Dropdown styles */
 .dropdown {
-      position: relative;
-      display: inline-block;
-    }
+  position: relative;
+  display: inline-block;
+}
 
-    .dropdown-toggle {
-      background-color: #f1f1f1;
-      border: 1px solid #ccc;
-      padding: 0px 21px 0px 0px;
-      right: 5px;
-      cursor: pointer;
-      border-radius: 5px;
-      position: relative;
-    }
+.dropdown-toggle {
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  padding: 0 21px 0 0;
+  right: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  position: relative;
+  user-select: none;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  transition: background-color 0.2s ease;
+  transform: translateZ(10px);
+}
 
-    .dropdown-toggle::after {
-      content: '▼';
-      position: absolute;
-      right: 5px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 12px;
-    }
+.dropdown-toggle:hover {
+  background-color: #e6e6e6;
+}
 
-    .dropdown-menu {
-      display: none;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background-color: white;
-      border: 1px solid #ccc;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-      z-index: 1000;
-      min-width: 150px;
-    }
+.dropdown-toggle::after {
+  content: '▼';
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+}
 
-    .dropdown-menu div {
-      padding: 10px;
-      cursor: pointer;
-    }
+.dropdown-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  z-index: 1000;
+  min-width: 150px;
+  border-radius: 5px;
+  transform: translateZ(20px);
+}
 
-    .dropdown-menu div:hover {
-      background-color: #f1f1f1;
-    }
+.dropdown-menu div {
+  padding: 10px;
+  cursor: pointer;
+  user-select: none;
+}
 
-    .dropdown.open .dropdown-menu {
-      display: block;
-    }
-    .search-icon{
-      margin-right: 10px;
-    }
-    
+.dropdown-menu div:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown.open .dropdown-menu {
+  display: block;
+}
+
+/* Search icon margin */
+.search-icon {
+  margin-right: 10px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+  }
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .main-content {
+    flex-direction: column;
+    padding: 10px;
+  }
+  .dashboard {
+    margin-right: 0;
+    margin-bottom: 20px;
+    transform: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  }
+  .dashboard-body {
+    flex-direction: column;
+  }
+  .calendar-schedule {
+    flex-direction: column;
+  }
+  .tag {
+    font-size: 10px;
+    padding: 4px 8px;
+  }
+}
+.anatomy-image {
+  width: 100%;
+  max-width: 100px;
+  object-fit: contain;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+}
+
+.anatomy-image.zoomed {
+  position: fixed; /* overlay on top */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1.8); /* moderate zoom */
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+  max-width: 90vw;
+  max-height: 90vh;
+  width: auto;
+  height: auto;
+  border-radius: 20px;
+  cursor: zoom-out;
+  background: white;
+}
