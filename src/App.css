@@ -1,0 +1,276 @@
+/* Reset & base styles */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body,
+html,
+#root {
+  height: 100%;
+  width: 100%;
+  font-family: 'Poppins', sans-serif;
+  background-color: #f6f9ff;
+  overflow: hidden;
+}
+
+/* App container layout */
+.app-container {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+/* Sidebar (assumes fixed width) */
+.sidebar {
+  width: 250px;
+  background-color: #ffffff;
+  border-right: 1px solid #e0e0e0;
+  padding: 20px;
+}
+
+/* Main content layout */
+.main-content {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+  /* padding: 20px; */
+  overflow-y: auto;
+}
+
+/* Dashboard section (left side) */
+.dashboard {
+  flex: 1;
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
+  margin-right: 20px;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  height: fit-content;
+}
+
+/* Dashboard header */
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* margin-bottom: 20px; */
+}
+
+.dashboard-header h2 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.dashboard-body {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+/* Anatomy section (left inside dashboard) */
+.anatomy-area {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.anatomy-image {
+  width: 100%;
+  max-width: 100px;
+  object-fit: contain;
+}
+
+.tag {
+  position: absolute;
+  border-radius: 20px;
+  font-size: 12px;
+  padding: 6px 12px;
+  color: white;
+  border: none;
+}
+
+.tag.heart {
+  top: 20%;
+  right: 0;
+  background-color: #7b3aed;
+}
+
+.tag.leg {
+  bottom: 22%;
+  left: 7%;
+  background-color: #0ea5e9;
+}
+
+/* Health cards section */
+.cards-area {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.card {
+  background: #f9fafe;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  border-radius: 16px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.card-icon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.card h4 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.card p {
+  font-size: 12px;
+  color: #666;
+  margin-bottom: 4px;
+}
+
+.progress {
+  width: 100%;
+  height: 6px;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+}
+
+.progress.red {
+  background: linear-gradient(to right, #f87171 70%, #e5e7eb 30%);
+}
+.progress.green {
+  background: linear-gradient(to right, #34d399 70%, #e5e7eb 30%);
+}
+.progress.orange {
+  background: linear-gradient(to right, #fb923c 70%, #e5e7eb 30%);
+}
+
+/* Activity area */
+/* .activity-area {
+  margin-top: 30px;
+} */
+
+.activity-area h3 {
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+
+/* Calendar and Schedule section (right side) */
+.calendar-schedule {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+}
+
+/* Scrollbar styling (optional) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background-color: #cfd8dc;
+  border-radius: 10px;
+}/* Make the top-bar stretch full width */
+.top-bar {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 10px 24px;
+  box-sizing: border-box;
+}
+
+/* Search bar container with icon inside */
+.search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 8px 12px;
+  width: 100%;
+  position: relative;
+}
+
+/* Input inside search bar */
+.search-input {
+  flex: 1;
+  border: none;
+  font-size: 16px;
+  outline: none;
+  background: transparent;
+}
+
+/* Bell icon inside the input */
+.bell-icon {
+  color: #888;
+  font-size: 20px;
+  cursor: pointer;
+  margin-left: 8px;
+}
+.dropdown {
+      position: relative;
+      display: inline-block;
+    }
+
+    .dropdown-toggle {
+      background-color: #f1f1f1;
+      border: 1px solid #ccc;
+      padding: 0px 21px 0px 0px;
+      right: 5px;
+      cursor: pointer;
+      border-radius: 5px;
+      position: relative;
+    }
+
+    .dropdown-toggle::after {
+      content: '▼';
+      position: absolute;
+      right: 5px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 12px;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      border: 1px solid #ccc;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      z-index: 1000;
+      min-width: 150px;
+    }
+
+    .dropdown-menu div {
+      padding: 10px;
+      cursor: pointer;
+    }
+
+    .dropdown-menu div:hover {
+      background-color: #f1f1f1;
+    }
+
+    .dropdown.open .dropdown-menu {
+      display: block;
+    }
+    .search-icon{
+      margin-right: 10px;
+    }
+    
